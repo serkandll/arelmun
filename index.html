@@ -517,16 +517,16 @@
             animation: flashText 0.7s infinite alternate;
         }
 
-@keyframes flashText {
-    0% {
-        color: #ffffff;
-        text-shadow: 0 0 5px #ffd700;
-    }
-    100% {
-        color: #ffd700;
-        text-shadow: 0 0 10px #ffd700;
-    }
-}
+        @keyframes flashText {
+            0% {
+                color: var(--primary);
+                text-shadow: 0 0 5px var(--secondary);
+            }
+            100% {
+                color: var(--secondary);
+                text-shadow: 0 0 10px var(--secondary);
+            }
+        }
 
         @keyframes slideInRight {
             from {
@@ -829,5 +829,6 @@
     </script>
 </body>
 </html>
+
 
 
