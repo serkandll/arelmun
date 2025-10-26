@@ -1,3 +1,6 @@
+<!--This website was developed by Lytra Development-->
+<!--Any usage of codes without permission will result in a DMCA notice.-->
+<!--Kayra MEYDAN // for more information, mail info@lytradev.com-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,6 +132,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
+            top: 60px;
             z-index: 1000;
             transition: var(--transition);
         }
@@ -478,6 +482,7 @@
             background: var(--secondary);
             color: var(--dark);
         }
+
         .late-notification {
             position: fixed;
             top: 0;
@@ -513,18 +518,34 @@
         .late-notification a:hover {
             text-decoration: underline;
         }
-        .applications-flash {
-            animation: flashText 0.7s infinite alternate;
+
+        .applications-flash-white {
+            animation: flashWhiteMenu 0.7s infinite alternate;
         }
 
-        @keyframes flashText {
+        .applications-flash-purple {
+            animation: flashPurpleMenu 0.7s infinite alternate;
+        }
+
+        @keyframes flashWhiteMenu {
             0% {
-                color: var(--primary);
-                text-shadow: 0 0 5px var(--secondary);
+                color: #ffd700;
+                text-shadow: 0 0 5px #6a0dad;
             }
             100% {
-                color: var(--secondary);
-                text-shadow: 0 0 10px var(--secondary);
+                color: #6a0dad;
+                text-shadow: 0 0 10px #6a0dad;
+            }
+        }
+
+        @keyframes flashPurpleMenu {
+            0% {
+                color: #ffd700;
+                text-shadow: 0 0 5px #ffffff;
+            }
+            100% {
+                color: #ffffff;
+                text-shadow: 0 0 10px #ffffff;
             }
         }
 
@@ -545,6 +566,7 @@
                 transform: translateX(100%);
             }
         }
+
         @media (max-width: 768px) {
             .header-container {
                 padding: 10px 0;
@@ -779,13 +801,33 @@
         document.addEventListener('DOMContentLoaded', function() {
             const lateNotification = document.getElementById('lateNotification');
             const applicationsLink = document.getElementById('applicationsLink');
-            applicationsLink.classList.add('applications-flash');
+            const header = document.querySelector('header');
+            
+            function updateFlashAnimation() {
+                if (header.classList.contains('scrolled')) {
+                    applicationsLink.classList.remove('applications-flash-white');
+                    applicationsLink.classList.add('applications-flash-purple');
+                } else {
+                    applicationsLink.classList.remove('applications-flash-purple');
+                    applicationsLink.classList.add('applications-flash-white');
+                }
+            }
+            
+            updateFlashAnimation();
+            
+            applicationsLink.classList.add('applications-flash-white');
+            
             setTimeout(function() {
                 lateNotification.classList.add('hide');
             }, 3000);
+            
             setTimeout(function() {
-                applicationsLink.classList.remove('applications-flash');
+                applicationsLink.classList.remove('applications-flash-white', 'applications-flash-purple');
             }, 7000);
+            
+            window.addEventListener('scroll', function() {
+                updateFlashAnimation();
+            });
         });
 
         const hamburger = document.getElementById('hamburger');
@@ -829,6 +871,3 @@
     </script>
 </body>
 </html>
-
-
-
