@@ -132,6 +132,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
+            top: 0;
             z-index: 1000;
             transition: var(--transition);
         }
@@ -277,7 +278,7 @@
             background-size: cover;
             background-position: center;
             color: var(--white);
-            padding: 240px 0 100px;
+            padding: 180px 0 100px;
             text-align: center;
         }
 
@@ -619,7 +620,7 @@
             }
             
             .hero {
-                padding: 200px 0 80px;
+                padding: 150px 0 80px;
             }
             
             .hero h1 {
@@ -822,11 +823,9 @@
             
             setTimeout(function() {
                 applicationsLink.classList.remove('applications-flash-white', 'applications-flash-purple');
-            }, 7000);
+            }, 6000);
             
-            window.addEventListener('scroll', function() {
-                updateFlashAnimation();
-            });
+            window.addEventListener('scroll', updateFlashAnimation);
         });
 
         const hamburger = document.getElementById('hamburger');
@@ -870,4 +869,3 @@
     </script>
 </body>
 </html>
-
