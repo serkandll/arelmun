@@ -797,75 +797,81 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lateNotification = document.getElementById('lateNotification');
-            const applicationsLink = document.getElementById('applicationsLink');
-            const header = document.querySelector('header');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const lateNotification = document.getElementById('lateNotification');
+        const applicationsLink = document.getElementById('applicationsLink');
+        const header = document.querySelector('header');
+        
+        let isFlashingActive = true;
+        
+        function updateFlashAnimation() {
+            if (!isFlashingActive) return;
             
-            function updateFlashAnimation() {
-                if (header.classList.contains('scrolled')) {
-                    applicationsLink.classList.remove('applications-flash-white');
-                    applicationsLink.classList.add('applications-flash-purple');
-                } else {
-                    applicationsLink.classList.remove('applications-flash-purple');
-                    applicationsLink.classList.add('applications-flash-white');
-                }
+            if (header.classList.contains('scrolled')) {
+                applicationsLink.classList.remove('applications-flash-white');
+                applicationsLink.classList.add('applications-flash-purple');
+            } else {
+                applicationsLink.classList.remove('applications-flash-purple');
+                applicationsLink.classList.add('applications-flash-white');
             }
-            
-            updateFlashAnimation();
-            
-            applicationsLink.classList.add('applications-flash-white');
-            
-            setTimeout(function() {
-                lateNotification.classList.add('hide');
-            }, 3000);
-            
-            setTimeout(function() {
-                applicationsLink.classList.remove('applications-flash-white', 'applications-flash-purple');
-            }, 6000);
-            
-            window.addEventListener('scroll', updateFlashAnimation);
-        });
+        }
+        
+        updateFlashAnimation();
+        
+        applicationsLink.classList.add('applications-flash-white');
+        
+        setTimeout(function() {
+            lateNotification.classList.add('hide');
+        }, 3000);
+        
+        setTimeout(function() {
+            isFlashingActive = false;
+            applicationsLink.classList.remove('applications-flash-white', 'applications-flash-purple');
+        }, 6000);
+        
+        window.addEventListener('scroll', updateFlashAnimation);
+    });
 
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
         
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle('active');
-            
-            if (navMenu.classList.contains('active')) {
-                hamburger.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-        
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-        
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        window.addEventListener('load', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        if (navMenu.classList.contains('active')) {
+            hamburger.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+    
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    window.addEventListener('load', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
         });
     </script>
 </body>
 </html>
+
